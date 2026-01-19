@@ -1,8 +1,26 @@
-# portfolio-template
-A basic html/css template for web concentration portfolio 1 students
+# Portfolio Website – Cloud Computing Lab 1
 
-Download this template and use it to build a simple portfolio website. There are lots of comments in the code to explain what is doing what, plus I have made a google presentation that will walk you through some of the things you need to do. Those slides can be found here:
+## Student Details
+- **Name:** Sarana Gnanojval
+- **Program:** B.Tech Computer Science
+- **University:** PES University
+- **Year:** 3rd Year
 
-https://docs.google.com/presentation/d/1ybdws_K_1xUW_wzs9dlSobAagYgSCbpZaJKJ1cLyp6k/edit?usp=sharing
+## Project Overview
+This portfolio website was deployed as part of **Cloud Computing Lab 1** to demonstrate:
+- IAAS (Supabase Object Storage)
+- PAAS (PythonAnywhere Flask Deployment)
+- SAAS (Vercel Website Deployment)
 
-Using this template requires a basic understanding of HTML and CSS
+## Technologies Used
+- HTML, CSS
+- GitHub
+- Supabase (Object Storage)
+- Vercel (Deployment)
+
+## Live Website
+🔗 *Paste your Vercel deployment link here*
+
+## Notes
+- Profile image is hosted using Supabase Object Storage
+- Website is fully responsive and publicly accessible
