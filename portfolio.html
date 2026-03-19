@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarana Gnanojval</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #080810;
+  --bg1: #0e0e1a;
+  --bg2: #13131f;
+  --bg3: #1a1a28;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --text: #eeedf5;
+  --muted: #6e6d82;
+  --muted2: #9998b0;
+  --accent: #6c63ff;
+  --accent-light: #a8a4ff;
+  --accent-glow: rgba(108,99,255,0.12);
+  --green: #34d399;
+  --amber: #fbbf24;
+  --red: #fb7185;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Cabinet Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 4rem;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,16,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent-light);letter-spacing:.04em}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s;letter-spacing:.02em}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-light);text-decoration:none;border:1px solid rgba(108,99,255,.3);padding:6px 16px;border-radius:6px;transition:all .2s}
+.nav-cta:hover{background:var(--accent-glow);border-color:var(--accent)}
+
+/* HERO */
+.hero{min-height:100vh;padding:120px 4rem 80px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(108,99,255,.18) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 70% 80% at 15% 50%,black 20%,transparent 75%);pointer-events:none}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(108,99,255,.08) 0%,transparent 65%);top:-200px;left:-200px;pointer-events:none}
+.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;max-width:1200px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-light);letter-spacing:.08em;margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s .1s ease forwards}
+.eyebrow-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-name{font-family:'Clash Display',sans-serif;font-size:clamp(3.2rem,6vw,5.2rem);font-weight:700;line-height:1.0;letter-spacing:-.03em;margin-bottom:.5rem;opacity:0;animation:fadeUp .6s .2s ease forwards}
+.hero-name .dim{color:var(--muted2)}
+.hero-role{font-family:'Clash Display',sans-serif;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:400;color:var(--accent-light);margin-bottom:1.75rem;letter-spacing:-.01em;opacity:0;animation:fadeUp .6s .3s ease forwards}
+.hero-desc{font-size:1rem;line-height:1.8;color:var(--muted2);max-width:480px;margin-bottom:2.5rem;opacity:0;animation:fadeUp .6s .4s ease forwards}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .6s .5s ease forwards}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:8px;font-family:'Cabinet Grotesk',sans-serif;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;transition:all .2s;border:none}
+.btn-fill{background:var(--accent);color:#fff}
+.btn-fill:hover{background:#7c74ff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(108,99,255,.3)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border-hover)}
+.btn-outline:hover{background:var(--bg2)}
+
+/* STATS CARD */
+.hero-right{opacity:0;animation:fadeUp .7s .35s ease forwards}
+.stats-card{background:var(--bg1);border:1px solid var(--border);border-radius:20px;padding:2rem}
+.stat-row{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;border-bottom:1px solid var(--border)}
+.stat-row:last-child{border-bottom:none;padding-bottom:.5rem}
+.stat-label-group{display:flex;align-items:center;gap:12px}
+.stat-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.si-p{background:rgba(108,99,255,.12)}
+.si-g{background:rgba(52,211,153,.12)}
+.si-a{background:rgba(251,191,36,.12)}
+.stat-meta{display:flex;flex-direction:column;gap:2px}
+.stat-name{font-size:13px;font-weight:700}
+.stat-sub{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.stat-value{font-family:'Clash Display',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-.03em;min-width:60px;text-align:right}
+.sv-p{color:var(--accent-light)}
+.sv-g{color:var(--green)}
+.sv-a{color:var(--amber)}
+.lc-breakdown{display:flex;gap:10px;padding:.75rem 0 0 48px}
+.lc-pill{font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 10px;border-radius:100px}
+.lc-pill.easy{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)}
+.lc-pill.med{background:rgba(251,191,36,.1);color:var(--amber);border:1px solid rgba(251,191,36,.2)}
+.lc-pill.hard{background:rgba(251,113,133,.1);color:var(--red);border:1px solid rgba(251,113,133,.2)}
+
+/* DIVIDER */
+.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border-hover),transparent)}
+
+/* SECTION */
+.section{padding:6rem 4rem;max-width:1200px;margin:0 auto}
+.section-label{display:flex;align-items:center;gap:12px;margin-bottom:3rem}
+.section-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent-light);letter-spacing:.12em;text-transform:uppercase}
+.section-rule{flex:1;height:1px;background:var(--border);max-width:48px}
+.section-title{font-family:'Clash Display',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;letter-spacing:-.02em}
+
+/* PROJECTS */
+#projects-wrap{background:var(--bg1)}
+.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.proj{background:var(--bg1);padding:2rem;display:flex;flex-direction:column;gap:1rem;text-decoration:none;color:inherit;position:relative;transition:background .2s;overflow:hidden}
+.proj::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--green));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
+.proj:hover{background:var(--bg2)}
+.proj:hover::after{transform:scaleX(1)}
+.proj-top{display:flex;justify-content:space-between;align-items:flex-start}
+.proj-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.06em}
+.proj-arrow{font-size:16px;color:var(--muted);transition:color .2s,transform .2s}
+.proj:hover .proj-arrow{color:var(--accent-light);transform:translate(3px,-3px)}
+.proj-name{font-family:'Clash Display',sans-serif;font-size:1.05rem;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+.proj-desc{font-size:13px;color:var(--muted2);line-height:1.65;flex:1}
+.proj-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.chip{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:4px;color:var(--muted2);background:var(--bg3);border:1px solid var(--border)}
+
+/* SKILLS */
+#skills-wrap{padding:6rem 4rem}
+.skills-grid-outer{max-width:1200px;margin:0 auto}
+.skills-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
+.skill-block-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
+.skill-list{display:flex;flex-wrap:wrap;gap:8px}
+.skill-item{font-size:13px;font-weight:700;color:var(--muted2);background:var(--bg1);border:1px solid var(--border);padding:6px 14px;border-radius:6px;transition:all .2s}
+.skill-item:hover{color:var(--text);border-color:var(--border-hover);background:var(--bg2)}
+
+/* EDUCATION */
+#edu-wrap{background:var(--bg);border-top:1px solid var(--border)}
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:1200px}
+.edu-card{background:var(--bg1);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;gap:1.5rem;align-items:flex-start;transition:border-color .2s}
+.edu-card:hover{border-color:var(--border-hover)}
+.edu-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.edu-icon.uni{background:rgba(108,99,255,.12)}
+.edu-icon.school{background:rgba(52,211,153,.1)}
+.edu-body{display:flex;flex-direction:column;gap:6px}
+.edu-degree{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:600;letter-spacing:-.01em}
+.edu-institute{font-size:13px;color:var(--muted2);font-weight:500}
+.edu-period{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;margin-top:2px}
+.edu-badge{display:inline-flex;align-items:center;gap:6px;margin-top:.75rem;padding:5px 14px;border-radius:8px;font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:-.01em}
+.edu-badge.cgpa{background:rgba(108,99,255,.12);color:var(--accent-light);border:1px solid rgba(108,99,255,.2)}
+.edu-badge.pct{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)}
+.edu-badge-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.06em;margin-top:4px}
+
+/* CONNECT */
+#connect-wrap{background:var(--bg1);border-top:1px solid var(--border)}
+.connect-inner{max-width:1200px;margin:0 auto;padding:6rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.connect-title{font-family:'Clash Display',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.25rem}
+.connect-title span{color:var(--accent-light)}
+.connect-desc{font-size:15px;color:var(--muted2);line-height:1.8}
+.connect-right{display:flex;flex-direction:column;gap:12px}
+.connect-link{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;background:var(--bg2);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);transition:all .2s}
+.connect-link:hover{background:var(--bg3);border-color:var(--border-hover);transform:translateX(4px)}
+.cl-left{display:flex;align-items:center;gap:12px}
+.cl-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.cl-name{font-size:14px;font-weight:700}
+.cl-handle{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:2px}
+.cl-arrow{color:var(--muted);font-size:16px;transition:color .2s}
+.connect-link:hover .cl-arrow{color:var(--accent-light)}
+
+footer{padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;border-top:1px solid var(--border)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  nav{padding:0 1.5rem}
+  .nav-links{display:none}
+  .hero{padding:100px 1.5rem 60px}
+  .hero-inner{grid-template-columns:1fr;gap:3rem}
+  .hero-right{order:-1}
+  .section{padding:4rem 1.5rem}
+  #skills-wrap{padding:4rem 1.5rem}
+  .projects-grid{grid-template-columns:1fr}
+  .skills-wrap{grid-template-columns:1fr}
+  .connect-inner{grid-template-columns:1fr;padding:4rem 1.5rem}
+  footer{padding:1.5rem;flex-direction:column;gap:8px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">sg_</span>
+  <ul class="nav-links">
+    <li><a href="#projects-wrap">Projects</a></li>
+    <li><a href="#skills-wrap">Skills</a></li>
+    <li><a href="#edu-wrap">Education</a></li>
+    <li><a href="#connect-wrap">Contact</a></li>
+  </ul>
+  <a href="https://drive.google.com/file/d/1TRmpMBrc9jld2oklp_E9bveN4wbqXfwO/view?usp=sharing" target="_blank" class="nav-cta">Resume ↗</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        PESU · Bengaluru · Open to Opportunities
+      </div>
+      <h1 class="hero-name">Sarana<br><span class="dim">Gnanojval</span></h1>
+      <div class="hero-role">Software Engineer &amp; ML Enthusiast</div>
+      <p class="hero-desc">I build intelligent systems — from ML pipelines that explain themselves, to full-stack platforms that connect people. I care about code that does something real.</p>
+      <div class="hero-btns">
+        <a href="#projects-wrap" class="btn btn-fill">See my work</a>
+        <a href="#connect-wrap" class="btn btn-outline">Get in touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="stats-card">
+        <div class="stat-row">
+          <div class="stat-label-group">
+            <div class="stat-icon si-p">🛠</div>
+            <div class="stat-meta">
+              <span class="stat-name">Projects Completed</span>
+              <span class="stat-sub">github.com/DranzerD</span>
+            </div>
+          </div>
+          <span class="stat-value sv-p">6</span>
+        </div>
+        <div class="stat-row">
+          <div class="stat-label-group">
+            <div class="stat-icon si-g">⚡</div>
+            <div class="stat-meta">
+              <span class="stat-name">Technologies</span>
+              <span class="stat-sub">languages, frameworks &amp; tools</span>
+            </div>
+          </div>
+          <span class="stat-value sv-g">15+</span>
+        </div>
+        <div class="stat-row" style="border-bottom:none;padding-bottom:.5rem">
+          <div class="stat-label-group">
+            <div class="stat-icon si-a">🧩</div>
+            <div class="stat-meta">
+              <span class="stat-name">DSA Problems Solved</span>
+              <span class="stat-sub">leetcode.com/u/Gnanojval</span>
+            </div>
+          </div>
+          <span class="stat-value sv-a" id="lc-total">···</span>
+        </div>
+        <div class="lc-breakdown">
+          <span class="lc-pill easy" id="pill-easy">Easy ···</span>
+          <span class="lc-pill med"  id="pill-med">Med ···</span>
+          <span class="lc-pill hard" id="pill-hard">Hard ···</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<div id="projects-wrap">
+  <div class="section">
+    <div class="section-label reveal">
+      <span class="section-tag">// work</span>
+      <div class="section-rule"></div>
+      <h2 class="section-title">Things I've Built</h2>
+    </div>
+    <div class="projects-grid">
+      <a class="proj reveal" href="https://github.com/DranzerD/MEETING-SYNTH" target="_blank">
+        <div class="proj-top"><span class="proj-num">01</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Meeting Synth</div>
+        <p class="proj-desc">ML-powered transcript analyzer. Extracts summaries, action items, decisions, and sentiment. Next.js frontend with a FastAPI backend.</p>
+        <div class="proj-chips"><span class="chip">TypeScript</span><span class="chip">Next.js</span><span class="chip">FastAPI</span><span class="chip">NLP</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/DranzerD/XAI-Temporal-Stability" target="_blank">
+        <div class="proj-top"><span class="proj-num">02</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">XAI Temporal Stability</div>
+        <p class="proj-desc">Research framework that measures explanation drift in credit default ML models over time using a custom TESI metric on LendingClub data.</p>
+        <div class="proj-chips"><span class="chip">Python</span><span class="chip">Jupyter</span><span class="chip">SHAP</span><span class="chip">XAI</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/DranzerD/FreshGuard-AI" target="_blank">
+        <div class="proj-top"><span class="proj-num">03</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">FreshGuard AI</div>
+        <p class="proj-desc">Food spoilage detector combining OpenCV and a CNN model to classify produce as fresh or rotten, with real-time Arduino hardware alerts.</p>
+        <div class="proj-chips"><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">CNN</span><span class="chip">Arduino</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/DranzerD/EcoTech-Risk-Analysis-An-AI-Based-Approach-To-Supplier-Procurement" target="_blank">
+        <div class="proj-top"><span class="proj-num">04</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">EcoTech Risk Analysis</div>
+        <p class="proj-desc">AI-driven procurement tool that automates RFP generation and scores supplier risk with Weka-based classification models.</p>
+        <div class="proj-chips"><span class="chip">Python</span><span class="chip">Weka</span><span class="chip">AI</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/DranzerD/AlumniConnect" target="_blank">
+        <div class="proj-top"><span class="proj-num">05</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">AlumniConnect</div>
+        <p class="proj-desc">Full-stack networking platform where students and alumni connect, share opportunities, and collaborate through a structured web portal.</p>
+        <div class="proj-chips"><span class="chip">JavaScript</span><span class="chip">Node.js</span><span class="chip">Full-Stack</span></div>
+      </a>
+      <a class="proj reveal" href="https://github.com/DranzerD/Schedula" target="_blank">
+        <div class="proj-top"><span class="proj-num">06</span><span class="proj-arrow">↗</span></div>
+        <div class="proj-name">Schedula</div>
+        <p class="proj-desc">Clean scheduling and event management web app built around an intuitive UX for personal productivity and note-taking.</p>
+        <div class="proj-chips"><span class="chip">JavaScript</span><span class="chip">Web App</span></div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div id="skills-wrap">
+  <div class="skills-grid-outer">
+    <div class="section-label reveal" style="padding:6rem 4rem 0;max-width:1200px;margin:0 auto">
+      <span class="section-tag">// stack</span>
+      <div class="section-rule"></div>
+      <h2 class="section-title">What I Work With</h2>
+    </div>
+    <div style="padding:2rem 4rem 6rem;max-width:1200px;margin:0 auto">
+      <div class="skills-wrap">
+        <div class="reveal">
+          <div class="skill-block-title">Languages</div>
+          <div class="skill-list"><span class="skill-item">Python</span><span class="skill-item">C++</span><span class="skill-item">JavaScript</span><span class="skill-item">TypeScript</span><span class="skill-item">SQL</span></div>
+        </div>
+        <div class="reveal">
+          <div class="skill-block-title">AI / ML</div>
+          <div class="skill-list"><span class="skill-item">TensorFlow</span><span class="skill-item">OpenCV</span><span class="skill-item">Scikit-learn</span><span class="skill-item">SHAP / XAI</span><span class="skill-item">FastAPI</span></div>
+        </div>
+        <div class="reveal">
+          <div class="skill-block-title">Web & Frameworks</div>
+          <div class="skill-list"><span class="skill-item">Next.js</span><span class="skill-item">React</span><span class="skill-item">Node.js</span><span class="skill-item">REST APIs</span></div>
+        </div>
+        <div class="reveal">
+          <div class="skill-block-title">Tools & Systems</div>
+          <div class="skill-list"><span class="skill-item">Git / GitHub</span><span class="skill-item">Linux</span><span class="skill-item">PostgreSQL</span><span class="skill-item">Docker</span><span class="skill-item">Arduino</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div id="edu-wrap">
+  <div class="section">
+    <div class="section-label reveal">
+      <span class="section-tag">// education</span>
+      <div class="section-rule"></div>
+      <h2 class="section-title">Academic Background</h2>
+    </div>
+    <div class="edu-grid">
+
+      <div class="edu-card reveal">
+        <div class="edu-icon uni">🎓</div>
+        <div class="edu-body">
+          <div class="edu-degree">B.Tech — Computer Science &amp; Engineering</div>
+          <div class="edu-institute">PES University, Bengaluru</div>
+          <div class="edu-period">2023 — 2027</div>
+          <div class="edu-badge cgpa">8.55 <span style="font-size:.75rem;font-weight:500;opacity:.7">/ 10</span></div>
+          <div class="edu-badge-label">CGPA</div>
+        </div>
+      </div>
+
+      <div class="edu-card reveal">
+        <div class="edu-icon school">📘</div>
+        <div class="edu-body">
+          <div class="edu-degree">Class XII — Science (PCM)</div>
+          <div class="edu-institute">Narayana CO Sindhu Bhavan, Bengaluru</div>
+          <div class="edu-period">2021 — 2023</div>
+          <div class="edu-badge pct">88.8%</div>
+          <div class="edu-badge-label">Percentage</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div id="connect-wrap">
+  <div class="connect-inner">
+    <div class="connect-left reveal">
+      <h2 class="connect-title">Let's build<br><span>something great.</span></h2>
+      <p class="connect-desc">I'm actively looking for internship roles and interesting projects. If you're working on something meaningful — reach out, I'd love to chat.</p>
+    </div>
+    <div class="connect-right reveal">
+      <a href="https://www.linkedin.com/in/sarana-gnanojval/" target="_blank" class="connect-link">
+        <div class="cl-left">
+          <div class="cl-icon" style="background:rgba(10,102,194,.15)">💼</div>
+          <div><div class="cl-name">LinkedIn</div><div class="cl-handle">sarana-gnanojval</div></div>
+        </div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://github.com/DranzerD" target="_blank" class="connect-link">
+        <div class="cl-left">
+          <div class="cl-icon" style="background:rgba(255,255,255,.06)">⌥</div>
+          <div><div class="cl-name">GitHub</div><div class="cl-handle">DranzerD</div></div>
+        </div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://leetcode.com/u/Gnanojval/" target="_blank" class="connect-link">
+        <div class="cl-left">
+          <div class="cl-icon" style="background:rgba(251,161,36,.12)">🧩</div>
+          <div><div class="cl-name">LeetCode</div><div class="cl-handle">Gnanojval</div></div>
+        </div>
+        <span class="cl-arrow">→</span>
+      </a>
+      <a href="https://drive.google.com/file/d/1TRmpMBrc9jld2oklp_E9bveN4wbqXfwO/view?usp=sharing" target="_blank" class="connect-link">
+        <div class="cl-left">
+          <div class="cl-icon" style="background:rgba(52,211,153,.1)">📄</div>
+          <div><div class="cl-name">Resume</div><div class="cl-handle">Google Drive</div></div>
+        </div>
+        <span class="cl-arrow">→</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>© 2025 Sarana Gnanojval</span>
+  <span>Built with intent.</span>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e,i) => {
+    if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*70); io.unobserve(e.target); }
+  });
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+async function loadLC(){
+  try{
+    const res = await fetch('https://alfa-leetcode-api.onrender.com/Gnanojval/solved');
+    const d = await res.json();
+    const total = d.solvedProblem ?? d.totalSolved ?? '—';
+    const easy  = d.easySolved   ?? '—';
+    const med   = d.mediumSolved ?? '—';
+    const hard  = d.hardSolved   ?? '—';
+    document.getElementById('lc-total').textContent = total;
+    document.getElementById('pill-easy').textContent = 'Easy ' + easy;
+    document.getElementById('pill-med').textContent  = 'Med '  + med;
+    document.getElementById('pill-hard').textContent = 'Hard ' + hard;
+  } catch {
+    document.getElementById('lc-total').innerHTML = '<a href="https://leetcode.com/u/Gnanojval/" target="_blank" style="color:var(--accent-light);font-size:13px;font-family:JetBrains Mono,monospace;text-decoration:none">View ↗</a>';
+    ['pill-easy','pill-med','pill-hard'].forEach((id,i)=>{
+      document.getElementById(id).textContent = ['Easy','Med','Hard'][i];
+    });
+  }
+}
+loadLC();
+</script>
+</body>
+</html>
