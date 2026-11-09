@@ -3,439 +3,641 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sarana Gnanojval</title>
+<title>Sarana Gnanojval — Software Engineer</title>
+<meta name="description" content="Sarana Gnanojval, final-year CS student in Bengaluru. Backend systems and ML tooling, measured and tested: nine projects in Java, Go, Python and TypeScript. LeetCode Knight, top 5%.">
+<meta property="og:title" content="Sarana Gnanojval — Software Engineer">
+<meta property="og:description" content="I build backend systems and ML tooling, then try to break them. Nine projects with the numbers to prove it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ffe93b'/%3E%3Cpath d='M6 24h20M6 24v-4M10 24v-2M14 24v-4M18 24v-2M22 24v-4M26 24v-2' stroke='%23101010' stroke-width='2' fill='none'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700;800&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #080810;
-  --bg1: #0e0e1a;
-  --bg2: #13131f;
-  --bg3: #1a1a28;
-  --border: rgba(255,255,255,0.06);
-  --border-hover: rgba(255,255,255,0.12);
-  --text: #eeedf5;
-  --muted: #6e6d82;
-  --muted2: #9998b0;
-  --accent: #6c63ff;
-  --accent-light: #a8a4ff;
-  --accent-glow: rgba(108,99,255,0.12);
-  --green: #34d399;
-  --amber: #fbbf24;
-  --red: #fb7185;
+:root{
+  --bg:#fdfdfb; --ink:#101010; --muted:#68685f; --soft:#dcdcd5; --tint:#f0efe8; --hl:#ffe93b; --hl-ink:#101010;
+  --sans:'Schibsted Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,Consolas,monospace;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Cabinet Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--bg3);border-radius:2px}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:0 4rem;height:64px;display:flex;align-items:center;justify-content:space-between;background:rgba(8,8,16,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-logo{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--accent-light);letter-spacing:.04em}
-.nav-links{display:flex;gap:2rem;list-style:none}
-.nav-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s;letter-spacing:.02em}
-.nav-links a:hover{color:var(--text)}
-.nav-cta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-light);text-decoration:none;border:1px solid rgba(108,99,255,.3);padding:6px 16px;border-radius:6px;transition:all .2s}
-.nav-cta:hover{background:var(--accent-glow);border-color:var(--accent)}
-
-/* HERO */
-.hero{min-height:100vh;padding:120px 4rem 80px;display:flex;flex-direction:column;justify-content:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle,rgba(108,99,255,.18) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 70% 80% at 15% 50%,black 20%,transparent 75%);pointer-events:none}
-.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(108,99,255,.08) 0%,transparent 65%);top:-200px;left:-200px;pointer-events:none}
-.hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 420px;gap:4rem;align-items:center;max-width:1200px}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent-light);letter-spacing:.08em;margin-bottom:1.5rem;opacity:0;animation:fadeUp .6s .1s ease forwards}
-.eyebrow-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 2s ease-in-out infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
-.hero-name{font-family:'Clash Display',sans-serif;font-size:clamp(3.2rem,6vw,5.2rem);font-weight:700;line-height:1.0;letter-spacing:-.03em;margin-bottom:.5rem;opacity:0;animation:fadeUp .6s .2s ease forwards}
-.hero-name .dim{color:var(--muted2)}
-.hero-role{font-family:'Clash Display',sans-serif;font-size:clamp(1.1rem,2.5vw,1.5rem);font-weight:400;color:var(--accent-light);margin-bottom:1.75rem;letter-spacing:-.01em;opacity:0;animation:fadeUp .6s .3s ease forwards}
-.hero-desc{font-size:1rem;line-height:1.8;color:var(--muted2);max-width:480px;margin-bottom:2.5rem;opacity:0;animation:fadeUp .6s .4s ease forwards}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap;opacity:0;animation:fadeUp .6s .5s ease forwards}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:8px;font-family:'Cabinet Grotesk',sans-serif;font-size:14px;font-weight:700;text-decoration:none;cursor:pointer;transition:all .2s;border:none}
-.btn-fill{background:var(--accent);color:#fff}
-.btn-fill:hover{background:#7c74ff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(108,99,255,.3)}
-.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border-hover)}
-.btn-outline:hover{background:var(--bg2)}
-
-/* STATS CARD */
-.hero-right{opacity:0;animation:fadeUp .7s .35s ease forwards}
-.stats-card{background:var(--bg1);border:1px solid var(--border);border-radius:20px;padding:2rem}
-.stat-row{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 0;border-bottom:1px solid var(--border)}
-.stat-row:last-child{border-bottom:none;padding-bottom:.5rem}
-.stat-label-group{display:flex;align-items:center;gap:12px}
-.stat-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
-.si-p{background:rgba(108,99,255,.12)}
-.si-g{background:rgba(52,211,153,.12)}
-.si-a{background:rgba(251,191,36,.12)}
-.stat-meta{display:flex;flex-direction:column;gap:2px}
-.stat-name{font-size:13px;font-weight:700}
-.stat-sub{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
-.stat-value{font-family:'Clash Display',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-.03em;min-width:60px;text-align:right}
-.sv-p{color:var(--accent-light)}
-.sv-g{color:var(--green)}
-.sv-a{color:var(--amber)}
-.lc-breakdown{display:flex;gap:10px;padding:.75rem 0 0 48px}
-.lc-pill{font-family:'JetBrains Mono',monospace;font-size:11px;padding:3px 10px;border-radius:100px}
-.lc-pill.easy{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)}
-.lc-pill.med{background:rgba(251,191,36,.1);color:var(--amber);border:1px solid rgba(251,191,36,.2)}
-.lc-pill.hard{background:rgba(251,113,133,.1);color:var(--red);border:1px solid rgba(251,113,133,.2)}
-
-/* DIVIDER */
-.divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--border-hover),transparent)}
-
-/* SECTION */
-.section{padding:6rem 4rem;max-width:1200px;margin:0 auto}
-.section-label{display:flex;align-items:center;gap:12px;margin-bottom:3rem}
-.section-tag{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent-light);letter-spacing:.12em;text-transform:uppercase}
-.section-rule{flex:1;height:1px;background:var(--border);max-width:48px}
-.section-title{font-family:'Clash Display',sans-serif;font-size:clamp(1.6rem,3vw,2.2rem);font-weight:600;letter-spacing:-.02em}
-
-/* PROJECTS */
-#projects-wrap{background:var(--bg1)}
-.projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-.proj{background:var(--bg1);padding:2rem;display:flex;flex-direction:column;gap:1rem;text-decoration:none;color:inherit;position:relative;transition:background .2s;overflow:hidden}
-.proj::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--green));transform:scaleX(0);transform-origin:left;transition:transform .3s ease}
-.proj:hover{background:var(--bg2)}
-.proj:hover::after{transform:scaleX(1)}
-.proj-top{display:flex;justify-content:space-between;align-items:flex-start}
-.proj-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.06em}
-.proj-arrow{font-size:16px;color:var(--muted);transition:color .2s,transform .2s}
-.proj:hover .proj-arrow{color:var(--accent-light);transform:translate(3px,-3px)}
-.proj-name{font-family:'Clash Display',sans-serif;font-size:1.05rem;font-weight:600;letter-spacing:-.01em;line-height:1.3}
-.proj-desc{font-size:13px;color:var(--muted2);line-height:1.65;flex:1}
-.proj-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
-.chip{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:4px;color:var(--muted2);background:var(--bg3);border:1px solid var(--border)}
-
-/* SKILLS */
-#skills-wrap{padding:6rem 4rem}
-.skills-grid-outer{max-width:1200px;margin:0 auto}
-.skills-wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem}
-.skill-block-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem}
-.skill-list{display:flex;flex-wrap:wrap;gap:8px}
-.skill-item{font-size:13px;font-weight:700;color:var(--muted2);background:var(--bg1);border:1px solid var(--border);padding:6px 14px;border-radius:6px;transition:all .2s}
-.skill-item:hover{color:var(--text);border-color:var(--border-hover);background:var(--bg2)}
-
-/* EDUCATION */
-#edu-wrap{background:var(--bg);border-top:1px solid var(--border)}
-.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:1200px}
-.edu-card{background:var(--bg1);border:1px solid var(--border);border-radius:16px;padding:2rem;display:flex;gap:1.5rem;align-items:flex-start;transition:border-color .2s}
-.edu-card:hover{border-color:var(--border-hover)}
-.edu-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
-.edu-icon.uni{background:rgba(108,99,255,.12)}
-.edu-icon.school{background:rgba(52,211,153,.1)}
-.edu-body{display:flex;flex-direction:column;gap:6px}
-.edu-degree{font-family:'Clash Display',sans-serif;font-size:1rem;font-weight:600;letter-spacing:-.01em}
-.edu-institute{font-size:13px;color:var(--muted2);font-weight:500}
-.edu-period{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;margin-top:2px}
-.edu-badge{display:inline-flex;align-items:center;gap:6px;margin-top:.75rem;padding:5px 14px;border-radius:8px;font-family:'Clash Display',sans-serif;font-size:1.1rem;font-weight:700;letter-spacing:-.01em}
-.edu-badge.cgpa{background:rgba(108,99,255,.12);color:var(--accent-light);border:1px solid rgba(108,99,255,.2)}
-.edu-badge.pct{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.2)}
-.edu-badge-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:.06em;margin-top:4px}
-
-/* CONNECT */
-#connect-wrap{background:var(--bg1);border-top:1px solid var(--border)}
-.connect-inner{max-width:1200px;margin:0 auto;padding:6rem 4rem;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
-.connect-title{font-family:'Clash Display',sans-serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin-bottom:1.25rem}
-.connect-title span{color:var(--accent-light)}
-.connect-desc{font-size:15px;color:var(--muted2);line-height:1.8}
-.connect-right{display:flex;flex-direction:column;gap:12px}
-.connect-link{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;background:var(--bg2);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);transition:all .2s}
-.connect-link:hover{background:var(--bg3);border-color:var(--border-hover);transform:translateX(4px)}
-.cl-left{display:flex;align-items:center;gap:12px}
-.cl-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
-.cl-name{font-size:14px;font-weight:700}
-.cl-handle{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:2px}
-.cl-arrow{color:var(--muted);font-size:16px;transition:color .2s}
-.connect-link:hover .cl-arrow{color:var(--accent-light)}
-
-footer{padding:2rem 4rem;display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:.04em;border-top:1px solid var(--border)}
-
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-@media(max-width:900px){
-  nav{padding:0 1.5rem}
-  .nav-links{display:none}
-  .hero{padding:100px 1.5rem 60px}
-  .hero-inner{grid-template-columns:1fr;gap:3rem}
-  .hero-right{order:-1}
-  .section{padding:4rem 1.5rem}
-  #skills-wrap{padding:4rem 1.5rem}
-  .projects-grid{grid-template-columns:1fr}
-  .skills-wrap{grid-template-columns:1fr}
-  .connect-inner{grid-template-columns:1fr;padding:4rem 1.5rem}
-  footer{padding:1.5rem;flex-direction:column;gap:8px}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0e0e0d;--ink:#f2f1ea;--muted:#9b9b91;--soft:#2c2c29;--tint:#1a1a18}
 }
+:root[data-theme="dark"]{--bg:#0e0e0d;--ink:#f2f1ea;--muted:#9b9b91;--soft:#2c2c29;--tint:#1a1a18}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:68px;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+::selection{background:var(--hl);color:var(--hl-ink)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono)}
+.skip{position:absolute;left:-999px;top:8px;background:var(--hl);color:var(--hl-ink);padding:6px 12px;z-index:99}
+.skip:focus{left:8px}
+
+/* ---------- top bar + ruler ---------- */
+header.bar{position:sticky;top:0;z-index:50;background:var(--bg);border-bottom:1px solid var(--soft)}
+.bar-in{display:flex;justify-content:space-between;align-items:center;height:52px;gap:16px}
+.brand{font-weight:700;text-decoration:none;letter-spacing:-.01em}
+.nav{display:flex;gap:20px;align-items:center;font-size:14.5px}
+.nav a{text-decoration:none;color:var(--muted)}
+.nav a:hover{color:var(--ink);text-decoration:underline}
+.nav .res{color:var(--ink);font-weight:600;text-decoration:underline}
+.theme{font-family:var(--mono);font-size:12px;color:var(--muted);border:1px solid var(--soft);padding:2px 8px}
+.theme:hover{color:var(--ink);border-color:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{padding-block:64px 48px}
+.meta{font-family:var(--mono);font-size:12.5px;color:var(--muted);margin:0 0 28px;letter-spacing:.01em}
+.lede{font-size:clamp(1.65rem,3.7vw,2.75rem);line-height:1.22;letter-spacing:-.022em;font-weight:500;margin:0;max-width:21em}
+.lede .lead-in{font-weight:800}
+.hl,mark{background:linear-gradient(transparent 10%,var(--hl) 10% 92%,transparent 92%);color:var(--hl-ink);padding:0 .14em;margin:0 -.14em;-webkit-box-decoration-break:clone;box-decoration-break:clone;text-decoration:none}
+a.hl:hover{background:var(--hl);text-decoration:underline;text-decoration-thickness:2px}
+.lcline{margin:26px 0 0;font-family:var(--mono);font-size:13.5px}
+.lcline b{font-weight:500}
+.status{margin:30px 0 0;max-width:34em;color:var(--muted);font-size:1.02rem}
+.status a{color:var(--ink)}
+.lanes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 28px;margin-top:18px}
+.lc{display:block;text-decoration:none;border-top:2px solid var(--ink);padding:14px 0 22px}
+.lc:hover{background:var(--tint);box-shadow:-12px 0 0 var(--tint),12px 0 0 var(--tint)}
+.lc .k{display:flex;justify-content:space-between;font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:12px}
+.lc .h{display:block;font-size:1.3rem;font-weight:700;line-height:1.28;letter-spacing:-.015em;margin-bottom:10px}
+.lc .d{display:block;font-size:14.5px;color:var(--muted);line-height:1.5;margin-bottom:12px}
+.lc .p{display:block;font-family:var(--mono);font-size:12px;line-height:1.55}
+
+/* ---------- section heads ---------- */
+section.wrap{padding-block:56px 8px}
+.sh{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-top:2px solid var(--ink);padding-top:12px;margin-bottom:6px}
+.sh h2{margin:0;font-size:1.05rem;font-weight:800;letter-spacing:-.01em}
+.sh h2 span{font-family:var(--mono);font-weight:400;font-size:.8rem;color:var(--muted);margin-left:8px}
+.sh button{font-family:var(--mono);font-size:12px;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.sh button:hover{color:var(--ink)}
+
+/* ---------- project table ---------- */
+summary,.lane-h{display:grid;grid-template-columns:44px minmax(0,1.45fr) minmax(0,1fr) minmax(0,.95fr) 20px;column-gap:20px;align-items:start}
+.legend{margin:10px 0 0;font-size:14.5px;color:var(--muted);max-width:40em}
+.lane{margin-top:46px}
+.lane-h{padding:0 0 14px;border-bottom:1px solid var(--ink);align-items:end}
+.lane-h .n{font-family:var(--mono);font-size:13px;color:var(--ink);font-weight:500;padding-top:0;align-self:start}
+.lane-h h3{margin:0;font-size:1.55rem;letter-spacing:-.022em;line-height:1.15;font-weight:800}
+.lane-h p{margin:6px 0 0;font-size:14.5px;color:var(--muted);line-height:1.45;max-width:34em}
+.lane-h .lab{margin:0;font-family:var(--mono);font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+details.row{border-bottom:1px solid var(--soft)}
+summary{list-style:none;cursor:pointer;padding:18px 0}
+summary::-webkit-details-marker{display:none}
+summary:hover,details[open]>summary{background:var(--tint);box-shadow:-12px 0 0 var(--tint),12px 0 0 var(--tint)}
+details[open]>summary .t strong{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:5px}
+.n{font-family:var(--mono);font-size:13px;color:var(--muted);padding-top:3px}
+.t strong{display:block;font-size:1.22rem;line-height:1.25;letter-spacing:-.015em;font-weight:700}
+.t em{display:block;font-style:normal;font-size:14.5px;color:var(--muted);line-height:1.45;margin-top:4px}
+.r{font-family:var(--mono);font-size:13.5px;font-weight:500;line-height:1.45;padding-top:3px}
+.s{font-family:var(--mono);font-size:12.5px;color:var(--muted);line-height:1.55;padding-top:3px}
+.pm{position:relative;width:14px;height:14px;margin-top:6px;justify-self:end}
+.pm::before,.pm::after{content:'';position:absolute;left:0;right:0;top:6px;height:2px;background:var(--ink)}
+.pm::after{transform:rotate(90deg);transition:transform .15s}
+details[open] .pm::after{transform:rotate(0)}
+.body{display:grid;grid-template-columns:44px minmax(0,1.45fr) minmax(0,1.95fr);column-gap:20px;padding:22px 0 34px}
+.body .what{grid-column:2}
+.body .what p{margin:0 0 1.1em;font-size:16px}
+.body .side{grid-column:3}
+.lab{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 8px}
+.how{margin:0 0 1.6em;padding:0;list-style:none}
+.how li{position:relative;padding-left:18px;margin:0 0 .6em;font-size:15.5px;line-height:1.55}
+.how li::before{content:'';position:absolute;left:0;top:.62em;width:8px;height:2px;background:var(--ink)}
+.nums{margin:0 0 1.6em;padding:0;list-style:none;border-top:1px solid var(--ink)}
+.nums li{font-family:var(--mono);font-size:13.5px;line-height:1.5;padding:9px 0;border-bottom:1px solid var(--soft)}
+.nums b{font-weight:500;background:linear-gradient(transparent 10%,var(--hl) 10% 92%,transparent 92%);color:var(--hl-ink);padding:0 .2em;margin:0 -.2em}
+.rough{margin:0 0 1.6em;font-size:15px;line-height:1.55;padding-left:14px;border-left:3px solid var(--ink)}
+.links{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:13px}
+
+/* ---------- elsewhere ---------- */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:56px;row-gap:40px;margin-top:18px}
+.blk h3{font-family:var(--mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:400;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid var(--soft)}
+.kv{margin:0;padding:0;list-style:none}
+.kv li{display:grid;grid-template-columns:118px 1fr;gap:12px;padding:5px 0;font-size:15.5px;line-height:1.5}
+.kv li>span:first-child{color:var(--muted);font-size:14px}
+.big{font-size:1.5rem;line-height:1.3;letter-spacing:-.02em;font-weight:600;margin:0 0 10px}
+.small{font-size:14.5px;color:var(--muted);margin:0}
+.earlier{margin:0;padding:0;list-style:none}
+.earlier li{padding:7px 0;border-bottom:1px solid var(--soft);font-size:15.5px}
+.earlier li:last-child{border-bottom:0}
+.earlier a{font-weight:600}
+.earlier span{color:var(--muted);font-size:14.5px}
+
+/* ---------- contact ---------- */
+.say{font-size:clamp(2rem,5.2vw,3.7rem);line-height:1.06;letter-spacing:-.03em;font-weight:800;margin:0 0 28px;max-width:12em}
+.leaders{margin:0;padding:0;list-style:none;border-top:1px solid var(--ink)}
+.leaders a{display:flex;align-items:baseline;gap:12px;padding:13px 0;border-bottom:1px solid var(--soft);text-decoration:none;font-weight:600;font-size:1.1rem}
+.leaders a::after{content:'';order:2;flex:1;border-bottom:2px dotted var(--soft);transform:translateY(-4px)}
+.leaders .h{order:3;font-family:var(--mono);font-size:13px;font-weight:400;color:var(--muted)}
+.leaders .ar{order:4;font-family:var(--mono)}
+.leaders a:hover{background:var(--tint);box-shadow:-12px 0 0 var(--tint),12px 0 0 var(--tint)}
+footer{margin-top:72px;padding:20px 0 40px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:12px;color:var(--muted);line-height:1.6}
+
+/* ---------- responsive ---------- */
+@media(max-width:820px){
+  body{font-size:16.5px}
+  .nav a.opt{display:none}
+  .hero{padding-block:44px 32px}
+  .lanes{grid-template-columns:1fr}
+  .lane-h{grid-template-columns:30px minmax(0,1fr);column-gap:12px}
+  .lane-h>span:not(.n){display:none}
+  summary{grid-template-columns:30px minmax(0,1fr) 18px;row-gap:8px;column-gap:12px;padding:16px 0}
+  summary .t{grid-column:2}
+  summary .r{grid-column:2;grid-row:2;padding-top:0}
+  summary .s{grid-column:2;grid-row:3;padding-top:0}
+  summary .pm{grid-column:3;grid-row:1}
+  summary:hover,details[open]>summary,.lc:hover{box-shadow:-10px 0 0 var(--tint),10px 0 0 var(--tint)}
+  .body{grid-template-columns:30px minmax(0,1fr);column-gap:12px}
+  .body .what,.body .side{grid-column:2}
+  .two{grid-template-columns:1fr}
+  .kv li{grid-template-columns:100px 1fr}
+}
+@media(max-width:420px){
+  .wrap{padding:0 18px}
+  .nav{gap:14px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+@media print{header.bar,.theme,.sh button{display:none}details.row .body{display:grid}}
 </style>
 </head>
 <body>
+<a class="skip" href="#work">Skip to projects</a>
 
-<nav>
-  <span class="nav-logo">sg_</span>
-  <ul class="nav-links">
-    <li><a href="#projects-wrap">Projects</a></li>
-    <li><a href="#skills-wrap">Skills</a></li>
-    <li><a href="#edu-wrap">Education</a></li>
-    <li><a href="#connect-wrap">Contact</a></li>
-  </ul>
-  <a href="https://drive.google.com/file/d/1TRmpMBrc9jld2oklp_E9bveN4wbqXfwO/view?usp=sharing" target="_blank" class="nav-cta">Resume ↗</a>
-</nav>
+<header class="bar">
+  <div class="wrap bar-in">
+    <a class="brand" href="#top">Sarana Gnanojval</a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#work">Work</a>
+      <a class="opt" href="#elsewhere">Elsewhere</a>
+      <a class="opt" href="#contact">Contact</a>
+      <a class="res" data-resume href="#" target="_blank" rel="noopener">Resume ↗</a>
+      <button class="theme" id="theme" type="button" aria-label="Toggle light and dark theme">dark</button>
+    </nav>
+  </div>
+</header>
 
-<section class="hero">
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-eyebrow">
-        <span class="eyebrow-dot"></span>
-        PESU · Bengaluru · Open to Opportunities
+<main id="top">
+<div class="wrap hero">
+  <p class="meta">Bengaluru · B.Tech CSE, PES University · Class of 2027</p>
+  <h1 class="lede"><span class="lead-in">I'm Sarana.</span> I build backend systems and ML tooling, then measure whether they actually work.</h1>
+  <p class="lcline"><mark>LeetCode Knight</mark> · rating <b data-lc="rating">1884</b> · top <b data-lc="top">5.22</b>% · <span data-lc="solved">650</span> solved · <a href="#leetcode">stats</a></p>
+  <p class="status">Final-year CS student looking for internships and early-career roles. Nine projects, sorted by the kind of role they fit. Start with yours:</p>
+  <div class="lanes">
+    <a class="lc" href="#lane-backend">
+      <span class="k"><span>A · Backend systems</span><span aria-hidden="true">↓</span></span>
+      <span class="h"><mark>1 payout</mark> from 24 simultaneous requests</span>
+      <span class="d">Services that stay correct under concurrency, retries and multiple tenants.</span>
+      <span class="p">SpendFlow · CampaignFlow · AlumniConnect</span>
+    </a>
+    <a class="lc" href="#lane-ml">
+      <span class="k"><span>B · ML you can measure</span><span aria-hidden="true">↓</span></span>
+      <span class="h"><mark>65.2% → 75.4%</mark> accuracy, trained on a 4&nbsp;GB laptop GPU</span>
+      <span class="d">Fine-tuning, agents and RAG, each with an evaluation harness.</span>
+      <span class="p">Text-to-SQL · OpsPilot · Meeting Synth</span>
+    </a>
+    <a class="lc" href="#lane-test">
+      <span class="k"><span>C · Testing &amp; validation</span><span aria-hidden="true">↓</span></span>
+      <span class="h"><mark>93.9%</mark> of faults caught with 80% less lab time</span>
+      <span class="d">Test selection, log triage and Wi-Fi diagnostics for wireless and infra teams.</span>
+      <span class="p">CellSelect · Faultline · Wi-Fi Reliability</span>
+    </a>
+  </div>
+</div>
+
+<section id="work" class="wrap">
+  <div class="sh">
+    <h2>Work<span>09 projects</span></h2>
+    <button type="button" id="toggleAll">Expand all</button>
+  </div>
+  <p class="legend">Yellow marks a number I measured. &ldquo;Still rough&rdquo; is what isn\'t finished or only works in a limited setting.</p>
+  <div class="lane" id="lane-backend">
+    <div class="lane-h">
+      <span class="n">A</span>
+      <div><h3>Backend systems</h3><p>Services that stay correct under concurrency, retries and multiple tenants.</p></div>
+      <span class="lab">Result</span><span class="lab">Stack</span><span></span>
+    </div>
+  <details class="row" id="spendflow">
+    <summary>
+      <span class="n">01</span>
+      <span class="t"><strong>SpendFlow</strong><em>Expense backend: receipts in, approvals, an append-only ledger, payouts that can't happen twice.</em></span>
+      <span class="r">1 payout from 24 simultaneous requests</span>
+      <span class="s">Java 21, Spring Boot, PostgreSQL, JWT</span>
+      <span class="pm" aria-hidden="true"></span>
+    </summary>
+    <div class="body">
+      <div class="what">
+        <p>A multi-tenant backend where employees submit expenses and receipts. Fields are read off the receipt (Claude when there's an API key, an offline parser when there isn't), a policy engine decides who has to approve, and approved spend posts to a double-entry ledger. Reimbursing is idempotent, so a retry never pays twice.</p>
+        <p class="lab">How it works</p>
+        <ul class="how">
+          <li>The tenant id only ever comes from the JWT, and every lookup is scoped by it.</li>
+          <li>Money is integer paise. The ledger rejects unbalanced posts, database triggers make rows immutable, and fixes are reversing entries.</li>
+          <li>Four separate guards against double payment: idempotency keys, row locks, a state-machine check and unique constraints.</li>
+          <li>Receipt extraction is a forced LLM tool call, then a validator re-checks every field. Anything low-confidence goes to a review queue.</li>
+          <li>Receipt jobs run through a database-backed queue with retries, backoff and a dead-letter queue.</li>
+        </ul>
       </div>
-      <h1 class="hero-name">Sarana<br><span class="dim">Gnanojval</span></h1>
-      <div class="hero-role">Software Engineer &amp; ML Enthusiast</div>
-      <p class="hero-desc">I build intelligent systems — from ML pipelines that explain themselves, to full-stack platforms that connect people. I care about code that does something real.</p>
-      <div class="hero-btns">
-        <a href="#projects-wrap" class="btn btn-fill">See my work</a>
-        <a href="#connect-wrap" class="btn btn-outline">Get in touch</a>
+      <div class="side">
+        <p class="lab">Numbers</p>
+        <ul class="nums">
+          <li>24 threads, same expense → <b>exactly 1 payout</b></li>
+          <li>40 parallel reimbursements → <b>0 double postings</b>, trial balance balanced</li>
+          <li>Duplicate detection: <b>precision 1.00, recall 1.00</b> (300 genuine, 60 injected duplicates, 60 hard negatives)</li>
+          <li>31 tests: unit, HTTP, concurrency, evals</li>
+        </ul>
+        <p class="lab">Still rough</p>
+        <p class="rough">No AWS deployment, CI, Dockerfile or frontend yet. The PostgreSQL path has only been run against H2.</p>
+        <div class="links"><a href="https://github.com/DranzerD/SpendFlow" target="_blank" rel="noopener">Code ↗</a></div>
       </div>
     </div>
-
-    <div class="hero-right">
-      <div class="stats-card">
-        <div class="stat-row">
-          <div class="stat-label-group">
-            <div class="stat-icon si-p">🛠</div>
-            <div class="stat-meta">
-              <span class="stat-name">Projects Completed</span>
-              <span class="stat-sub">github.com/DranzerD</span>
-            </div>
-          </div>
-          <span class="stat-value sv-p">6</span>
-        </div>
-        <div class="stat-row">
-          <div class="stat-label-group">
-            <div class="stat-icon si-g">⚡</div>
-            <div class="stat-meta">
-              <span class="stat-name">Technologies</span>
-              <span class="stat-sub">languages, frameworks &amp; tools</span>
-            </div>
-          </div>
-          <span class="stat-value sv-g">15+</span>
-        </div>
-        <div class="stat-row" style="border-bottom:none;padding-bottom:.5rem">
-          <div class="stat-label-group">
-            <div class="stat-icon si-a">🧩</div>
-            <div class="stat-meta">
-              <span class="stat-name">DSA Problems Solved</span>
-              <span class="stat-sub">leetcode.com/u/Gnanojval</span>
-            </div>
-          </div>
-          <span class="stat-value sv-a" id="lc-total">···</span>
-        </div>
-        <div class="lc-breakdown">
-          <span class="lc-pill easy" id="pill-easy">Easy ···</span>
-          <span class="lc-pill med"  id="pill-med">Med ···</span>
-          <span class="lc-pill hard" id="pill-hard">Hard ···</span>
-        </div>
+  </details>
+  <details class="row" id="campaignflow">
+    <summary>
+      <span class="n">02</span>
+      <span class="t"><strong>CampaignFlow</strong><em>Two Go services: ad serving with hard budgets, and analytics over a RabbitMQ event stream.</em></span>
+      <span class="r">No overspend under concurrent serving</span>
+      <span class="s">Go, Redis (Lua), RabbitMQ, PostgreSQL, Docker</span>
+      <span class="pm" aria-hidden="true"></span>
+    </summary>
+    <div class="body">
+      <div class="what">
+        <p>The Ad Service manages advertisers, campaigns and ads and serves the best eligible ad that's still under budget. The Analytics Service consumes impression and click events from RabbitMQ and reports aggregates. Each service owns its own PostgreSQL database, and everything runs with Docker Compose.</p>
+        <p class="lab">How it works</p>
+        <ul class="how">
+          <li>Budget checks are a single Redis Lua script, so they're atomic. A concurrency test proves nothing overspends.</li>
+          <li>Events are delivered at-least-once, so the consumer is idempotent: the event UUID is the primary key with <span class="mono">ON CONFLICT DO NOTHING</span>, and the counter increments in the same transaction.</li>
+          <li>Reports are suppressed below 50 impressions, so small groups can't be singled out.</li>
+          <li>Fixed after my own review: a poison-message requeue loop, events lost on cold start, and double-counted clicks (Redis <span class="mono">SET NX</span>).</li>
+        </ul>
       </div>
+      <div class="side">
+        <p class="lab">Numbers</p>
+        <ul class="nums">
+          <li>Concurrency test: <b>no overspend</b></li>
+          <li>Real-broker end-to-end test covers publish → consume → ack</li>
+          <li>Keyword cache in Redis with TTL and invalidation on writes</li>
+        </ul>
+        <div class="links"><a href="https://github.com/DranzerD/CampaignFlow" target="_blank" rel="noopener">Code ↗</a></div>
+      </div>
+    </div>
+  </details>
+  <details class="row" id="alumniconnect">
+    <summary>
+      <span class="n">03</span>
+      <span class="t"><strong>AlumniConnect</strong><em>An alumni network where each college's data stays private to its members.</em></span>
+      <span class="r">26 API routes, 5 roles, 140 end-to-end checks</span>
+      <span class="s">Next.js 15, React 19, SQLite, JWT</span>
+      <span class="pm" aria-hidden="true"></span>
+    </summary>
+    <div class="body">
+      <div class="what">
+        <p>Students, alumni and faculty connect, message, post jobs, run events and set up mentorship. Sign-up needs the college's email domain, and every query is scoped to the user's college. Deployed on Render.</p>
+        <p class="lab">How it works</p>
+        <ul class="how">
+          <li>Two layers of checks: Edge middleware verifies the JWT and role, and each API route re-checks the user in the database, so deactivating someone takes effect immediately.</li>
+          <li>Login rate limiting, parameterised SQL with escaped <span class="mono">LIKE</span> wildcards, and security headers.</li>
+          <li>Event RSVPs check capacity inside a transaction, so no overbooking. Connection-request races are handled the same way.</li>
+        </ul>
+      </div>
+      <div class="side">
+        <p class="lab">Numbers</p>
+        <ul class="nums">
+          <li><b>26</b> API route files (38 handlers), 16 pages, 10 tables</li>
+          <li><b>140</b> manual end-to-end checks passing</li>
+          <li>5 roles, from student to platform admin</li>
+        </ul>
+        <p class="lab">Still rough</p>
+        <p class="rough">Messaging polls instead of using WebSockets. SQLite and the in-memory rate limiter assume one server. No automated test suite and no email verification.</p>
+        <div class="links"><a href="https://github.com/DranzerD/AlumniConnect" target="_blank" rel="noopener">Code ↗</a></div>
+      </div>
+    </div>
+  </details>
+  </div>
+
+  <div class="lane" id="lane-ml">
+    <div class="lane-h">
+      <span class="n">B</span>
+      <div><h3>ML you can measure</h3><p>Fine-tuning, agents and RAG, each with an evaluation harness and an honest read of where it fails.</p></div>
+      <span class="lab">Result</span><span class="lab">Stack</span><span></span>
+    </div>
+  <details class="row" id="text-to-sql">
+    <summary>
+      <span class="n">04</span>
+      <span class="t"><strong>Text-to-SQL with QLoRA</strong><em>Fine-tuned Qwen3-1.7B to write SQL, entirely on a 4&nbsp;GB laptop GPU.</em></span>
+      <span class="r">65.2% → 75.4% execution accuracy</span>
+      <span class="s">PyTorch, PEFT, bitsandbytes, Ollama</span>
+      <span class="pm" aria-hidden="true"></span>
+    </summary>
+    <div class="body">
+      <div class="what">
+        <p>A QLoRA fine-tune that turns plain English into SQLite queries. Training, evaluation and deployment all ran on an RTX 3050 laptop GPU. The final model is exported to GGUF and served by Ollama, with a CLI that answers questions about any SQLite file.</p>
+        <p class="lab">How it works</p>
+        <ul class="how">
+          <li>I ran every training example against SQLite first. About 20% of the reference queries were broken and got filtered out.</li>
+          <li>It fits in 4&nbsp;GB with 4-bit quantisation, gradient checkpointing, a paged 8-bit optimiser and gradient accumulation (peak 3.2–3.4&nbsp;GB).</li>
+          <li>Grading compares result sets, not SQL strings, in sandboxed in-memory databases with timeouts. The grader has its own tests.</li>
+          <li>Confidence intervals, McNemar's paired test, and a data-size ablation from 1k to 8k examples.</li>
+          <li>Showing three example rows per table in the prompt lifted every model by about 12 points.</li>
+        </ul>
+      </div>
+      <div class="side">
+        <p class="lab">Numbers</p>
+        <ul class="nums">
+          <li>Base <b>65.2%</b> → fine-tuned <b>75.4%</b> on 500 held-out questions (+10.2 points, p &lt; 1e-6)</li>
+          <li>Gemma 3 4B, twice the size: 69.4%</li>
+          <li>Ollama GGUF export: <b>76.2%</b>, no accuracy loss</li>
+          <li>Single-join queries 45% → 72%</li>
+          <li>Whole pipeline: about 6 hours on one laptop GPU</li>
+        </ul>
+        <p class="lab">Still rough</p>
+        <p class="rough">Trained on a synthetic dataset (Spider and BIRD are next). Window functions are still weak (2 of 18). Read-only queries only.</p>
+        <div class="links"><a href="https://github.com/DranzerD/Text_To_SQL_QLORA" target="_blank" rel="noopener">Code ↗</a></div>
+      </div>
+    </div>
+  </details>
+  <details class="row" id="opspilot">
+    <summary>
+      <span class="n">05</span>
+      <span class="t"><strong>OpsPilot</strong><em>An AI agent that investigates incidents on a simulated 5-service platform, scored against a rules baseline.</em></span>
+      <span class="r">86% top-1 root cause, 92 of 92 citations valid</span>
+      <span class="s">Python, FastAPI, OpenTelemetry, Prometheus, DuckDB</span>
+      <span class="pm" aria-hidden="true"></span>
+    </summary>
+    <div class="body">
+      <div class="what">
+        <p>A five-service simulated platform instrumented with OpenTelemetry and Prometheus. A fault injector breaks it in realistic ways (pool exhaustion, latency, timeout misconfig, malformed input, bad deploys) and records the true root cause. An LLM agent with read-only tools and a rules baseline then diagnose every incident, and an eval harness scores both.</p>
+        <p class="lab">How it works</p>
+        <ul class="how">
+          <li>Incidents are frozen into Parquet bundles, so every experiment replays identically.</li>
+          <li>A triage step builds a compact briefing, so one investigation costs about 2.5k tokens.</li>
+          <li>The agent has four tools (<span class="mono">query_metric</span>, <span class="mono">search_logs</span>, <span class="mono">get_service_spans</span>, <span class="mono">submit_diagnosis</span>) and must cite evidence. I check mechanically that every cited id exists in its evidence ledger.</li>
+          <li>A leak test confirms no recorded telemetry reveals that a fault was injected. The held-out set was scored once, after freezing the prompts.</li>
+        </ul>
+      </div>
+      <div class="side">
+        <p class="lab">Numbers</p>
+        <ul class="nums">
+          <li>Dev set (21 faults, 3 no-fault): <b>86%</b> with tools vs 76% without</li>
+          <li><b>92 of 92</b> citations valid</li>
+          <li>Held-out set: agent <b>70%</b>, rules baseline 90%</li>
+          <li>gpt-oss-120b did not beat 20b and used 2–3× the tokens</li>
+        </ul>
+        <p class="lab">Still rough</p>
+        <p class="rough">On the held-out set the agent loses to the rules baseline, and latency faults and no-fault runs are its weak spots. Alert grouping, a web console, a Slack bot and remediation approvals from my spec aren't built.</p>
+        <div class="links"><a href="https://github.com/DranzerD/OpsPilot" target="_blank" rel="noopener">Code ↗</a></div>
+      </div>
+    </div>
+  </details>
+  <details class="row" id="meeting-synth">
+    <summary>
+      <span class="n">06</span>
+      <span class="t"><strong>Meeting Synth</strong><em>Paste a meeting transcript, get tasks, decisions and sentiment. Then ask across every meeting and get cited answers.</em></span>
+      <span class="r">Recall@5 1.00, refuses what it can't answer</span>
+      <span class="s">Next.js, FastAPI, ChromaDB, sentence-transformers</span>
+      <span class="pm" aria-hidden="true"></span>
+    </summary>
+    <div class="body">
+      <div class="what">
+        <p>A local ML pipeline pulls tasks, decisions, sentiment and a summary out of a transcript. A RAG chat then answers questions across every analysed meeting, citing the meeting, chunk and speaker, and says "I don't know" without calling the LLM when the evidence isn't good enough.</p>
+        <p class="lab">How it works</p>
+        <ul class="how">
+          <li>Retrieve, rerank with a cross-encoder, pass a relevance gate, then answer with citations. The LLM provider is swappable (Groq, OpenAI, Anthropic).</li>
+          <li>If the Python service is down, a TypeScript heuristic pipeline takes over.</li>
+          <li>An eval harness measures Recall@K, Precision@K, MRR and refusal accuracy, and benchmarks latency with and without reranking.</li>
+        </ul>
+      </div>
+      <div class="side">
+        <p class="lab">Numbers</p>
+        <ul class="nums">
+          <li>Recall@5 <b>1.00</b>, MRR <b>0.967</b> with reranking</li>
+          <li>Refused <b>5 of 5</b> unanswerable questions; wrongly refused 0 of 15 answerable ones</li>
+          <li>Task classifier 73.2% F1 (5-fold CV)</li>
+          <li>Reranking costs 140.6 ms vs 12.3 ms without</li>
+          <li>185 automated tests (106 pytest, 79 Vitest)</li>
+        </ul>
+        <p class="lab">Still rough</p>
+        <p class="rough">One shared workspace (no multi-tenancy), meetings stored as JSON files, no claim-level faithfulness check, no streaming.</p>
+        <div class="links"><a href="https://github.com/DranzerD/MEETING-SYNTH" target="_blank" rel="noopener">Code ↗</a></div>
+      </div>
+    </div>
+  </details>
+  </div>
+
+  <div class="lane" id="lane-test">
+    <div class="lane-h">
+      <span class="n">C</span>
+      <div><h3>Testing &amp; validation</h3><p>Tools that decide what to test, find what broke and explain why, built around wireless and infrastructure workflows.</p></div>
+      <span class="lab">Result</span><span class="lab">Stack</span><span></span>
+    </div>
+  <details class="row" id="cellselect">
+    <summary>
+      <span class="n">07</span>
+      <span class="t"><strong>CellSelect</strong><em>ML that picks which cellular validation tests to run for a code change, given a lab-time budget.</em></span>
+      <span class="r">93.9% of faults caught with 80% less lab time</span>
+      <span class="s">Python, scikit-learn, pytest, GitHub Actions</span>
+      <span class="pm" aria-hidden="true"></span>
+    </summary>
+    <div class="body">
+      <div class="what">
+        <p>It predicts which tests are likely to fail for a change, then picks and orders a subset that fits the time budget while keeping mandatory tests and coverage of what changed. It runs against a simulator I wrote of a cellular stack (link budget, CQI/BLER, HARQ, RRC timers, A3 handover, reconnection) with 22 injectable software faults.</p>
+        <p class="lab">How it works</p>
+        <ul class="how">
+          <li>Greedy selection by <span class="mono">(risk × residual + λ·coverage) / duration</span>, with critical tests always included.</li>
+          <li>Safe fallbacks for thin history, model uncertainty, unseen change types and a missing model.</li>
+          <li>Leakage control: chronological splits, forward-chaining CV, and tests that mutate future data to prove the features don't change.</li>
+          <li>Every pick or skip comes with a human-readable reason.</li>
+          <li>CI runs lint, an Ubuntu/Windows × Python 3.11/3.12 matrix, a smoke pipeline and a benchmark.</li>
+        </ul>
+      </div>
+      <div class="side">
+        <p class="lab">Numbers</p>
+        <ul class="nums">
+          <li>20% budget: <b>93.9%</b> of faults vs 85.7% for the best baseline</li>
+          <li>10% budget: <b>90.1%</b> vs 76.6%</li>
+          <li>(3 seeds × 120 held-out changes)</li>
+          <li>First failing test after about 367 s, vs 3,573 s for the full suite</li>
+          <li>Selection overhead 130–146 ms; simulator has 160 tests</li>
+        </ul>
+        <p class="lab">Still rough</p>
+        <p class="rough">The simulator and data are synthetic, not a real modem or RF chain, and per-execution PR-AUC is modest (about 0.19).</p>
+        <div class="links"><a href="https://github.com/DranzerD/handover-ml" target="_blank" rel="noopener">Code ↗</a></div>
+      </div>
+    </div>
+  </details>
+  <details class="row" id="faultline">
+    <summary>
+      <span class="n">08</span>
+      <span class="t"><strong>Faultline</strong><em>Turns a day of raw failure logs into a short triage report, published automatically.</em></span>
+      <span class="r">1,202 failure lines → 28 signatures</span>
+      <span class="s">Python, Drain3, scikit-learn, Ollama, GitHub Actions</span>
+      <span class="pm" aria-hidden="true"></span>
+    </summary>
+    <div class="body">
+      <div class="what">
+        <p>Failure lines are parsed into templates (Drain), embedded, clustered into recurring signatures, classified (new bug, known bug, flaky, environment, noise), summarised by a local LLM through Ollama, and published as HTML to GitHub Pages whenever new logs land.</p>
+        <p class="lab">How it works</p>
+        <ul class="how">
+          <li>Runs on about 1M lines of the Loghub BGL supercomputer dataset, which has real alert labels.</li>
+          <li>Time-based train/test split, with tuning only on an inner validation split.</li>
+          <li>A new-signature detector flags alert classes never seen in training.</li>
+          <li>Parser and classifier state is committed, so CI resumes incrementally. LLM summaries are cached per signature.</li>
+          <li>No paid services: public data, local embeddings, local LLM.</li>
+        </ul>
+      </div>
+      <div class="side">
+        <p class="lab">Numbers</p>
+        <ul class="nums">
+          <li>Classifier <b>96.9%</b> accuracy vs 87.2% baseline</li>
+          <li>Alert precision 1.00, recall 0.92</li>
+          <li><b>82.4%</b> on never-seen templates (baseline 21.3%)</li>
+          <li>Signature purity 98.3%</li>
+          <li>Median daily review: <b>1,202 lines → 28 signatures</b></li>
+        </ul>
+        <div class="links"><a href="https://github.com/DranzerD/Faultline" target="_blank" rel="noopener">Code ↗</a><a href="https://dranzerd.github.io/Faultline/" target="_blank" rel="noopener">Live reports ↗</a></div>
+      </div>
+    </div>
+  </details>
+  <details class="row" id="wifi">
+    <summary>
+      <span class="n">09</span>
+      <span class="t"><strong>Wi-Fi Reliability Framework</strong><em>A pytest framework that tests Wi-Fi, captures packets and logs, and works out why a test failed.</em></span>
+      <span class="r">4 of 4 injected faults diagnosed</span>
+      <span class="s">Python, pytest, Scapy, tc/netem, iptables</span>
+      <span class="pm" aria-hidden="true"></span>
+    </summary>
+    <div class="body">
+      <div class="what">
+        <p>It tests latency, loss, DNS, stability and reconnection, captures packet and log evidence around each test, and diagnoses root cause with a 10-rule engine. An optional LLM layer explains the result and flags where it disagrees with the rules instead of overriding them. Runs on Windows, Linux and macOS.</p>
+        <p class="lab">How it works</p>
+        <ul class="how">
+          <li>Each of the 10 rules is a pure function with unit tests (weak signal, congestion, DNS, AP deauth, driver drop).</li>
+          <li>Faults are injected for real (tc/netem, iptables, firewall rules) or synthetically, and the report says which one ran.</li>
+          <li>I caught a bug in my own measurement: receive-segment coalescing made a healthy link look like 21% TCP retransmissions. Fixing the detection took that to 0%. A BPF filter fixed capture-scope pollution too.</li>
+        </ul>
+      </div>
+      <div class="side">
+        <p class="lab">Numbers</p>
+        <ul class="nums">
+          <li>Control, weak signal, DNS failure, unexpected drop: <b>4 of 4</b> diagnosed correctly</li>
+          <li>False retransmissions <b>21% → 0%</b> on a healthy link</li>
+          <li>16 offline rule-engine tests</li>
+        </ul>
+        <p class="lab">Still rough</p>
+        <p class="rough">Consumer adapters can't do monitor mode, so the deauth rule can't fire on my hardware. Loss and latency injection is synthetic on Windows. No iperf3 throughput test.</p>
+        <div class="links"><a href="https://github.com/DranzerD/Wi-Fi-Reliability-Test-Diagnostics-Framework" target="_blank" rel="noopener">Code ↗</a></div>
+      </div>
+    </div>
+  </details>
+  </div>
+
+</section>
+
+<section id="elsewhere" class="wrap">
+  <div class="sh"><h2>Elsewhere</h2></div>
+  <div class="two">
+    <div class="blk" id="leetcode">
+      <h3>LeetCode</h3>
+      <p class="big"><mark>Knight</mark> · rating <span data-lc="rating">1884</span> · top <span data-lc="top">5.22</span>%</p>
+      <p class="small"><span data-lc="solved">650</span> solved (<span data-lc="easy">211</span> easy, <span data-lc="med">349</span> medium, <span data-lc="hard">90</span> hard) across <span data-lc="contests">12</span> contests. <a href="https://leetcode.com/u/Gnanojval/" target="_blank" rel="noopener">Profile ↗</a></p>
+    </div>
+
+    <div class="blk">
+      <h3>Education</h3>
+      <ul class="kv">
+        <li><span>2023 – 2027</span><span><strong>B.Tech, Computer Science &amp; Engineering</strong><br>PES University, Bengaluru · CGPA 8.52</span></li>
+        <li><span>2021 – 2023</span><span><strong>Class XII, Science (PCM)</strong><br>Narayana CO Sindhu Bhavan, Bengaluru · 88.8%</span></li>
+      </ul>
+    </div>
+
+    <div class="blk">
+      <h3>Tools I use</h3>
+      <ul class="kv">
+        <li><span>Languages</span><span>Java, Python, Go, TypeScript, JavaScript, SQL, C++</span></li>
+        <li><span>Backend &amp; data</span><span>Spring Boot, FastAPI, Node.js, Next.js, React, PostgreSQL, Redis, RabbitMQ, DuckDB</span></li>
+        <li><span>ML</span><span>PyTorch, Hugging Face (PEFT/QLoRA), scikit-learn, sentence-transformers, ChromaDB, TensorFlow, OpenCV</span></li>
+        <li><span>Infra &amp; testing</span><span>Docker, GitHub Actions, OpenTelemetry, Prometheus, pytest, JUnit, AWS S3, Linux, Git</span></li>
+      </ul>
+    </div>
+
+    <div class="blk">
+      <h3>Earlier projects</h3>
+      <ul class="earlier">
+        <li><a href="https://github.com/DranzerD/XAI-Temporal-Stability" target="_blank" rel="noopener">XAI Temporal Stability</a> <span>— measuring how SHAP explanations of credit-default models drift over time</span></li>
+        <li><a href="https://github.com/DranzerD/FreshGuard-AI" target="_blank" rel="noopener">FreshGuard AI</a> <span>— OpenCV + CNN fresh-or-rotten classifier with Arduino alerts</span></li>
+        <li><a href="https://github.com/DranzerD/EcoTech-Risk-Analysis-An-AI-Based-Approach-To-Supplier-Procurement" target="_blank" rel="noopener">EcoTech Risk Analysis</a> <span>— RFP automation and supplier risk scoring in Weka</span></li>
+        <li><a href="https://github.com/DranzerD/Schedula" target="_blank" rel="noopener">Schedula</a> <span>— scheduling and note-taking web app</span></li>
+      </ul>
     </div>
   </div>
 </section>
 
-<div class="divider"></div>
-
-<div id="projects-wrap">
-  <div class="section">
-    <div class="section-label reveal">
-      <span class="section-tag">// work</span>
-      <div class="section-rule"></div>
-      <h2 class="section-title">Things I've Built</h2>
-    </div>
-    <div class="projects-grid">
-      <a class="proj reveal" href="https://github.com/DranzerD/MEETING-SYNTH" target="_blank">
-        <div class="proj-top"><span class="proj-num">01</span><span class="proj-arrow">↗</span></div>
-        <div class="proj-name">Meeting Synth</div>
-        <p class="proj-desc">ML-powered transcript analyzer. Extracts summaries, action items, decisions, and sentiment. Next.js frontend with a FastAPI backend.</p>
-        <div class="proj-chips"><span class="chip">TypeScript</span><span class="chip">Next.js</span><span class="chip">FastAPI</span><span class="chip">NLP</span></div>
-      </a>
-      <a class="proj reveal" href="https://github.com/DranzerD/XAI-Temporal-Stability" target="_blank">
-        <div class="proj-top"><span class="proj-num">02</span><span class="proj-arrow">↗</span></div>
-        <div class="proj-name">XAI Temporal Stability</div>
-        <p class="proj-desc">Research framework that measures explanation drift in credit default ML models over time using a custom TESI metric on LendingClub data.</p>
-        <div class="proj-chips"><span class="chip">Python</span><span class="chip">Jupyter</span><span class="chip">SHAP</span><span class="chip">XAI</span></div>
-      </a>
-      <a class="proj reveal" href="https://github.com/DranzerD/FreshGuard-AI" target="_blank">
-        <div class="proj-top"><span class="proj-num">03</span><span class="proj-arrow">↗</span></div>
-        <div class="proj-name">FreshGuard AI</div>
-        <p class="proj-desc">Food spoilage detector combining OpenCV and a CNN model to classify produce as fresh or rotten, with real-time Arduino hardware alerts.</p>
-        <div class="proj-chips"><span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">CNN</span><span class="chip">Arduino</span></div>
-      </a>
-      <a class="proj reveal" href="https://github.com/DranzerD/EcoTech-Risk-Analysis-An-AI-Based-Approach-To-Supplier-Procurement" target="_blank">
-        <div class="proj-top"><span class="proj-num">04</span><span class="proj-arrow">↗</span></div>
-        <div class="proj-name">EcoTech Risk Analysis</div>
-        <p class="proj-desc">AI-driven procurement tool that automates RFP generation and scores supplier risk with Weka-based classification models.</p>
-        <div class="proj-chips"><span class="chip">Python</span><span class="chip">Weka</span><span class="chip">AI</span></div>
-      </a>
-      <a class="proj reveal" href="https://github.com/DranzerD/AlumniConnect" target="_blank">
-        <div class="proj-top"><span class="proj-num">05</span><span class="proj-arrow">↗</span></div>
-        <div class="proj-name">AlumniConnect</div>
-        <p class="proj-desc">Full-stack networking platform where students and alumni connect, share opportunities, and collaborate through a structured web portal.</p>
-        <div class="proj-chips"><span class="chip">JavaScript</span><span class="chip">Node.js</span><span class="chip">Full-Stack</span></div>
-      </a>
-      <a class="proj reveal" href="https://github.com/DranzerD/Schedula" target="_blank">
-        <div class="proj-top"><span class="proj-num">06</span><span class="proj-arrow">↗</span></div>
-        <div class="proj-name">Schedula</div>
-        <p class="proj-desc">Clean scheduling and event management web app built around an intuitive UX for personal productivity and note-taking.</p>
-        <div class="proj-chips"><span class="chip">JavaScript</span><span class="chip">Web App</span></div>
-      </a>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div id="skills-wrap">
-  <div class="skills-grid-outer">
-    <div class="section-label reveal" style="padding:6rem 4rem 0;max-width:1200px;margin:0 auto">
-      <span class="section-tag">// stack</span>
-      <div class="section-rule"></div>
-      <h2 class="section-title">What I Work With</h2>
-    </div>
-    <div style="padding:2rem 4rem 6rem;max-width:1200px;margin:0 auto">
-      <div class="skills-wrap">
-        <div class="reveal">
-          <div class="skill-block-title">Languages</div>
-          <div class="skill-list"><span class="skill-item">Python</span><span class="skill-item">C++</span><span class="skill-item">JavaScript</span><span class="skill-item">TypeScript</span><span class="skill-item">SQL</span></div>
-        </div>
-        <div class="reveal">
-          <div class="skill-block-title">AI / ML</div>
-          <div class="skill-list"><span class="skill-item">TensorFlow</span><span class="skill-item">OpenCV</span><span class="skill-item">Scikit-learn</span><span class="skill-item">SHAP / XAI</span><span class="skill-item">FastAPI</span></div>
-        </div>
-        <div class="reveal">
-          <div class="skill-block-title">Web & Frameworks</div>
-          <div class="skill-list"><span class="skill-item">Next.js</span><span class="skill-item">React</span><span class="skill-item">Node.js</span><span class="skill-item">REST APIs</span></div>
-        </div>
-        <div class="reveal">
-          <div class="skill-block-title">Tools & Systems</div>
-          <div class="skill-list"><span class="skill-item">Git / GitHub</span><span class="skill-item">Linux</span><span class="skill-item">PostgreSQL</span><span class="skill-item">Docker</span><span class="skill-item">Arduino</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div id="edu-wrap">
-  <div class="section">
-    <div class="section-label reveal">
-      <span class="section-tag">// education</span>
-      <div class="section-rule"></div>
-      <h2 class="section-title">Academic Background</h2>
-    </div>
-    <div class="edu-grid">
-
-      <div class="edu-card reveal">
-        <div class="edu-icon uni">🎓</div>
-        <div class="edu-body">
-          <div class="edu-degree">B.Tech — Computer Science &amp; Engineering</div>
-          <div class="edu-institute">PES University, Bengaluru</div>
-          <div class="edu-period">2023 — 2027</div>
-          <div class="edu-badge cgpa">8.52 <span style="font-size:.75rem;font-weight:500;opacity:.7">/ 10</span></div>
-          <div class="edu-badge-label">CGPA</div>
-        </div>
-      </div>
-
-      <div class="edu-card reveal">
-        <div class="edu-icon school">📘</div>
-        <div class="edu-body">
-          <div class="edu-degree">Class XII — Science (PCM)</div>
-          <div class="edu-institute">Narayana CO Sindhu Bhavan, Bengaluru</div>
-          <div class="edu-period">2021 — 2023</div>
-          <div class="edu-badge pct">88.8%</div>
-          <div class="edu-badge-label">Percentage</div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<div class="divider"></div>
-
-<div id="connect-wrap">
-  <div class="connect-inner">
-    <div class="connect-left reveal">
-      <h2 class="connect-title">Let's build<br><span>something great.</span></h2>
-      <p class="connect-desc">I'm actively looking for internship roles and interesting projects. If you're working on something meaningful — reach out, I'd love to chat.</p>
-    </div>
-    <div class="connect-right reveal">
-      <a href="https://www.linkedin.com/in/sarana-gnanojval/" target="_blank" class="connect-link">
-        <div class="cl-left">
-          <div class="cl-icon" style="background:rgba(10,102,194,.15)">💼</div>
-          <div><div class="cl-name">LinkedIn</div><div class="cl-handle">sarana-gnanojval</div></div>
-        </div>
-        <span class="cl-arrow">→</span>
-      </a>
-      <a href="https://github.com/DranzerD" target="_blank" class="connect-link">
-        <div class="cl-left">
-          <div class="cl-icon" style="background:rgba(255,255,255,.06)">⌥</div>
-          <div><div class="cl-name">GitHub</div><div class="cl-handle">DranzerD</div></div>
-        </div>
-        <span class="cl-arrow">→</span>
-      </a>
-      <a href="https://leetcode.com/u/Gnanojval/" target="_blank" class="connect-link">
-        <div class="cl-left">
-          <div class="cl-icon" style="background:rgba(251,161,36,.12)">🧩</div>
-          <div><div class="cl-name">LeetCode</div><div class="cl-handle">Gnanojval</div></div>
-        </div>
-        <span class="cl-arrow">→</span>
-      </a>
-      <a href="https://drive.google.com/file/d/11qbiu7blJrSyA_MEj6NTpa-TEieOszeṆn/view?usp=sharing" target="_blank" class="connect-link">
-        <div class="cl-left">
-          <div class="cl-icon" style="background:rgba(52,211,153,.1)">📄</div>
-          <div><div class="cl-name">Resume</div><div class="cl-handle">Google Drive</div></div>
-        </div>
-        <span class="cl-arrow">→</span>
-      </a>
-    </div>
-  </div>
-</div>
-
-<footer>
-  <span>© 2025 Sarana Gnanojval</span>
-  <span>Built with intent.</span>
-</footer>
+<section id="contact" class="wrap">
+  <div class="sh"><h2>Contact</h2></div>
+  <p class="say" style="margin-top:28px">If you're building something with backend or ML in it, say hi.</p>
+  <ul class="leaders">
+    <li><a href="https://www.linkedin.com/in/sarana-gnanojval/" target="_blank" rel="noopener">LinkedIn <span class="h">sarana-gnanojval</span><span class="ar">↗</span></a></li>
+    <li><a href="https://github.com/DranzerD" target="_blank" rel="noopener">GitHub <span class="h">DranzerD</span><span class="ar">↗</span></a></li>
+    <li><a href="https://leetcode.com/u/Gnanojval/" target="_blank" rel="noopener">LeetCode <span class="h">Gnanojval</span><span class="ar">↗</span></a></li>
+    <li><a data-resume href="#" target="_blank" rel="noopener">Resume <span class="h">Google Drive</span><span class="ar">↗</span></a></li>
+  </ul>
+  <footer>Every number here comes from the README of the repo it links to, limitations included.<br>Last updated November 2026.</footer>
+</section>
+</main>
 
 <script>
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((e,i) => {
-    if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*70); io.unobserve(e.target); }
-  });
-},{threshold:.08});
-document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+const RESUME_URL = "https://drive.google.com/file/d/11qbiu7blJrSyA_MEj6NTpa-TEieOszen/view?usp=sharing";
+const $ = (s,c=document)=>c.querySelector(s);
+const $$ = (s,c=document)=>[...c.querySelectorAll(s)];
 
-async function loadLC(){
-  try{
-    const res = await fetch('https://alfa-leetcode-api.onrender.com/Gnanojval/solved');
-    const d = await res.json();
-    const total = d.solvedProblem ?? d.totalSolved ?? '—';
-    const easy  = d.easySolved   ?? '—';
-    const med   = d.mediumSolved ?? '—';
-    const hard  = d.hardSolved   ?? '—';
-    document.getElementById('lc-total').textContent = total;
-    document.getElementById('pill-easy').textContent = 'Easy ' + easy;
-    document.getElementById('pill-med').textContent  = 'Med '  + med;
-    document.getElementById('pill-hard').textContent = 'Hard ' + hard;
-  } catch {
-    document.getElementById('lc-total').innerHTML = '<a href="https://leetcode.com/u/Gnanojval/" target="_blank" style="color:var(--accent-light);font-size:13px;font-family:JetBrains Mono,monospace;text-decoration:none">View ↗</a>';
-    ['pill-easy','pill-med','pill-hard'].forEach((id,i)=>{
-      document.getElementById(id).textContent = ['Easy','Med','Hard'][i];
-    });
-  }
+$$("[data-resume]").forEach(a=>a.href=RESUME_URL);
+
+/* theme */
+const root = document.documentElement, tBtn = $("#theme");
+const isDark = ()=> root.dataset.theme ? root.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+function paintBtn(){ tBtn.textContent = isDark() ? "light" : "dark"; }
+try{ const s = localStorage.getItem("theme"); if(s) root.dataset.theme = s; }catch{}
+paintBtn();
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",paintBtn);
+tBtn.addEventListener("click",()=>{
+  const next = isDark() ? "light" : "dark";
+  root.dataset.theme = next; paintBtn();
+  try{ localStorage.setItem("theme", next); }catch{}
+});
+
+/* open a project row from a link or the URL hash */
+function openRow(id, scroll){
+  const d = document.getElementById(id);
+  if(d && d.tagName==="DETAILS"){ d.open = true; if(scroll) setTimeout(()=>d.scrollIntoView({block:"start"}),20); }
 }
-loadLC();
+addEventListener("hashchange",()=>openRow(location.hash.slice(1), true));
+document.addEventListener("click",e=>{
+  const a = e.target.closest('a[href^="#"]'); if(!a) return;
+  const id = a.getAttribute("href").slice(1);
+  if(document.getElementById(id)?.tagName==="DETAILS"){ e.preventDefault(); history.replaceState(null,"","#"+id); openRow(id,true); }
+});
+if(location.hash) openRow(location.hash.slice(1), false);
+
+/* expand / collapse all */
+const all = $("#toggleAll");
+all.addEventListener("click",()=>{
+  const rows = $$("details.row"); const open = rows.some(r=>!r.open);
+  rows.forEach(r=>r.open = open);
+  all.textContent = open ? "Collapse all" : "Expand all";
+});
+
+/* live LeetCode stats; defaults are baked into the HTML */
+const LC = "https://alfa-leetcode-api.onrender.com";
+const setLC=(k,v)=>{ if(v==null||v==="") return; $$(`[data-lc="${k}"]`).forEach(el=>el.textContent=v); };
+async function getJSON(url){
+  const c = new AbortController(), t = setTimeout(()=>c.abort(),9000);
+  try{ const r = await fetch(url,{signal:c.signal}); if(!r.ok) throw 0; return await r.json(); } finally{ clearTimeout(t); }
+}
+(async()=>{
+  try{ const s = await getJSON(LC+"/Gnanojval/solved");
+    setLC("solved",s.solvedProblem); setLC("easy",s.easySolved); setLC("med",s.mediumSolved); setLC("hard",s.hardSolved); }catch{}
+  try{ const c = (await getJSON(LC+"/userContestRankingInfo/Gnanojval")).userContestRanking;
+    if(c){ setLC("rating",Math.round(c.rating)); setLC("top",Number(c.topPercentage).toFixed(2)); setLC("contests",c.attendedContestsCount); } }catch{}
+})();
 </script>
 </body>
 </html>
