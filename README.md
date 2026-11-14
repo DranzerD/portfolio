@@ -1,6 +1,6 @@
 # Portfolio
 
-Personal portfolio of Sarana Gnanojval. One static `index.html`, no build step, deployed with GitHub Pages.
+Personal portfolio of Gnanojval. One static `index.html`, no build step, deployed with GitHub Pages.
 
 - A single message up top (backend systems and ML tooling, measured), then three lanes matching the kind of role a visitor is hiring for: backend systems, ML you can measure, testing and validation.
 - Nine projects as an expandable table: what was built, how it works, the measured numbers, and what's still rough.
